@@ -13,7 +13,7 @@ app.use(bodyParser.json({limit: '10mb', extended: true}))
 app.use(bodyParser.urlencoded({limit: '10mb', extended: true}))
 
 // on va chercher fichier routes
-var routes = require("./route");
+var routes = require("./routes/route");
 routes(app) //envoi de l'app 
 
 const PORT = process.env.PORT || 3000
