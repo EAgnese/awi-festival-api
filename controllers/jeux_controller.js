@@ -1,12 +1,12 @@
-const model_affectations = require("../models/jeux_model")
+const model_jeux = require("../models/jeux_model")
 
-function select_affectations(req, res) {
+function select_jeux(req, res) {
 
     console.log(req.method)
     console.log(req.url)
     console.log("demande de tous les jeux")
 
-    promise = model_affectations.getAffectations()
+    promise = model_jeux.getJeux()
     promise.then((values) => {
         res.status(200).send(values.rows)
         console.log("tous les jeux recup")
@@ -17,5 +17,5 @@ function select_affectations(req, res) {
 }
 
 module.exports = {
-    select_affectations,
+    select_jeux,
 }
