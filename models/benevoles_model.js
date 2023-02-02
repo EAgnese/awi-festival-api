@@ -7,7 +7,6 @@ function getBenevoles(){
         db.query(sql, [], (err, result) => {
             if (err){
                 console.error(err.message);
-                console.log("err")
             }
             else{
                 console.log("bd envoie données sur BENEVOLE")
