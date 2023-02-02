@@ -1,10 +1,10 @@
 let mysql = require('mysql')
 
 let connection = mysql.createConnection({
-  host     : 'sql11.freemysqlhosting.net',
-  user     : 'sql11481586',
-  password : '9p2wj4sy4P',
-  database : 'sql11481586'
+  host     : 'postgresql-simplify.alwaysdata.net',
+  user     : 'simplify_awi_festival',
+  password : 'awi_festival',
+  database : 'simplify_awi_festival'
 })
 
 module.exports = connection
