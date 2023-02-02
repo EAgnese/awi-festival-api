@@ -1,7 +1,7 @@
 const model_benevoles = require("../models/benevoles_model")
 
 function select_benevoles(req, res) {
-
+    console.log("CC")
     console.log(req.method)
     console.log(req.url)
     console.log("demande de tous les benevoles")

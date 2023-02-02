@@ -2,7 +2,7 @@ const db = require("../config/bd");
 
 function getBenevoles(){
     return new Promise((resolve, reject) => {
-        const sql = "SELECT * FROM BENEVOLE"
+        const sql = "SELECT * FROM Benevole"
         console.log(sql)
         db.query(sql, [], (err, result) => {
             if (err){
