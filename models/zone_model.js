@@ -1,15 +1,13 @@
 const db = require("../config/bd");
 
-function getJeux(){
+function getZones(){
     return new Promise((resolve, reject) => {
-        const sql = "SELECT * FROM Jeu"
-        console.log(sql)
+        const sql = "SELECT * FROM Zone"
         db.query(sql, [], (err, result) => {
             if (err){
                 console.error(err.message);
             }
             else{
-                console.log("bd envoie données sur JEU")
                 resolve(result);
             }
         });
@@ -17,5 +15,5 @@ function getJeux(){
 }
 
 module.exports ={
-    getJeux,
+    getZones,
 }
