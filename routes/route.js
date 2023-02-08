@@ -6,7 +6,6 @@ module.exports = (app) =>{
     const utilisateurRouter = require('./utilisateur_route');
 
 
-
     app.use('/benevoles', benevoleRouter);
     app.use('/jeux', jeuRouter);
     app.use('/typesJeux', typeJeuRouter);

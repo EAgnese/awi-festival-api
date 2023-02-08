@@ -1,7 +1,6 @@
 const benevole_model = require("../models/benevole_model")
 
 function selectBenevoles(req, res) {
-
     promise = benevole_model.getBenevoles()
     promise.then((values) => {
         res.status(200).send(values)
@@ -11,8 +10,7 @@ function selectBenevoles(req, res) {
     })
 }
 function selectBenevoleById(req, res) {
-
-    promise = benevole_model.getBenevole()
+    promise = benevole_model.getBenevole(req.body.id)
     promise.then((values) => {
         res.status(200).send(values)
     }).catch((error) => {
@@ -22,7 +20,7 @@ function selectBenevoleById(req, res) {
 }
 function deleteBenevole(req, res) {
 
-    promise = benevole_model.deleteBenevole()
+    promise = benevole_model.deleteBenevole(req.body.id)
     promise.then((values) => {
         res.status(200).send(values)
     }).catch((error) => {
@@ -32,7 +30,7 @@ function deleteBenevole(req, res) {
 }
 function createBenevole(req, res) {
 
-    promise = benevole_model.createBenevole()
+    promise = benevole_model.createBenevole(req.body.nom, req.body.prenom, req.body.email)
     promise.then((values) => {
         res.status(200).send(values)
     }).catch((error) => {
@@ -40,9 +38,9 @@ function createBenevole(req, res) {
         console.error(error.message)
     })
 }
-function updateBenevoleByID(req, res) {
+function updateBenevoleById(req, res) {
 
-    promise = benevole_model.updateBenevole()
+    promise = benevole_model.updateBenevole(req.body.nom, req.body.prenom, req.body.email, req.body.id)
     promise.then((values) => {
         res.status(200).send(values)
     }).catch((error) => {
@@ -56,5 +54,5 @@ module.exports = {
     selectBenevoleById,
     deleteBenevole,
     createBenevole,
-    updateBenevoleByID,
+    updateBenevoleById,
 }

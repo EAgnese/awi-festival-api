@@ -40,7 +40,7 @@ function createJeu(req, res) {
         console.error(error.message)
     })
 }
-function updateJeuByID(req, res) {
+function updateJeuById(req, res) {
 
     promise = jeu_model.updateJeu()
     promise.then((values) => {
@@ -56,5 +56,5 @@ module.exports = {
     selectJeuById,
     deleteJeu,
     createJeu,
-    updateJeuByID,
+    updateJeuById,
 }
