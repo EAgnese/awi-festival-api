@@ -12,7 +12,7 @@ function selectUtilisateurs(req, res) {
 }
 function selectUtilisateurById(req, res) {
 
-    promise = utilisateur_model.getUtilisateur()
+    promise = utilisateur_model.getUtilisateur(req.body.id)
     promise.then((values) => {
         res.status(200).send(values)
     }).catch((error) => {
@@ -22,7 +22,7 @@ function selectUtilisateurById(req, res) {
 }
 function deleteUtilisateur(req, res) {
 
-    promise = utilisateur_model.deleteUtilisateur()
+    promise = utilisateur_model.deleteUtilisateur(req.body.id)
     promise.then((values) => {
         res.status(200).send(values)
     }).catch((error) => {
@@ -32,7 +32,7 @@ function deleteUtilisateur(req, res) {
 }
 function createUtilisateur(req, res) {
 
-    promise = utilisateur_model.createUtilisateur()
+    promise = utilisateur_model.createUtilisateur(req.body.nom,req.body.prenom,req.body.mail,req.body.mdp)
     promise.then((values) => {
         res.status(200).send(values)
     }).catch((error) => {
@@ -42,7 +42,7 @@ function createUtilisateur(req, res) {
 }
 function updateUtilisateurById(req, res) {
 
-    promise = utilisateur_model.updateUtilisateur()
+    promise = utilisateur_model.updateUtilisateur(req.body.nom,req.body.prenom,req.body.mail,req.body.mdp,req.body.id)
     promise.then((values) => {
         res.status(200).send(values)
     }).catch((error) => {

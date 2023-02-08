@@ -12,7 +12,7 @@ function selectTypeJeux(req, res) {
 }
 function selectTypeJeuById(req, res) {
 
-    promise = typeJeu_model.getTypeJeu()
+    promise = typeJeu_model.getTypeJeu(req.body.id)
     promise.then((values) => {
         res.status(200).send(values)
     }).catch((error) => {
@@ -22,7 +22,7 @@ function selectTypeJeuById(req, res) {
 }
 function deleteTypeJeu(req, res) {
 
-    promise = typeJeu_model.deleteTypeJeu()
+    promise = typeJeu_model.deleteTypeJeu(req.body.id)
     promise.then((values) => {
         res.status(200).send(values)
     }).catch((error) => {
@@ -32,7 +32,7 @@ function deleteTypeJeu(req, res) {
 }
 function createTypeJeu(req, res) {
 
-    promise = typeJeu_model.createTypeJeu()
+    promise = typeJeu_model.createTypeJeu(req.body.nom)
     promise.then((values) => {
         res.status(200).send(values)
     }).catch((error) => {
@@ -42,7 +42,7 @@ function createTypeJeu(req, res) {
 }
 function updateTypeJeuById(req, res) {
 
-    promise = typeJeu_model.updateTypeJeu()
+    promise = typeJeu_model.updateTypeJeu(req.body.id,req.body.nom)
     promise.then((values) => {
         res.status(200).send(values)
     }).catch((error) => {

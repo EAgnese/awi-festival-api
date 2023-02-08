@@ -27,7 +27,6 @@ function getBenevole(id){
     });
 }
 function deleteBenevole(id){
-    console.log("test")
     return new Promise((resolve, reject) => {
         const sql = `DELETE FROM Benevole WHERE idBenevole = ${db.escape(id)}`
         db.query(sql, [], (err, result) => {

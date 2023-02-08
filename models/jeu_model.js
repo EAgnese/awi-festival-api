@@ -13,9 +13,9 @@ function getJeux(){
         });
     });
 }
-function getJeu(){
+function getJeu(id){
     return new Promise((resolve, reject) => {
-        const sql = "SELECT * FROM Jeu"
+        const sql = `SELECT * FROM Jeu WHERE idJeu = ${db.escape(id)}`
         db.query(sql, [], (err, result) => {
             if (err){
                 console.error(err.message);
@@ -26,9 +26,9 @@ function getJeu(){
         });
     });
 }
-function deleteJeu(){
+function deleteJeu(id){
     return new Promise((resolve, reject) => {
-        const sql = "SELECT * FROM Jeu"
+        const sql = `DELETE FROM Jeu WHERE idJeu = ${db.escape(id)}`
         db.query(sql, [], (err, result) => {
             if (err){
                 console.error(err.message);
@@ -39,10 +39,9 @@ function deleteJeu(){
         });
     });
 }
-
-function createJeu(){
+function createJeu(idType, nom){
     return new Promise((resolve, reject) => {
-        const sql = "SELECT * FROM Jeu"
+        const sql = `INSERT INTO Jeu VALUES (NULL, ${db.escape(idType)},${db.escape(nom)})`
         db.query(sql, [], (err, result) => {
             if (err){
                 console.error(err.message);
@@ -53,10 +52,9 @@ function createJeu(){
         });
     });
 }
-
-function updateJeu(){
+function updateJeu(id,idType,nom){
     return new Promise((resolve, reject) => {
-        const sql = "SELECT * FROM Jeu"
+        const sql = `UPDATE Jeu SET idType = ${db.escape(idType)} , nom = ${db.escape(nom)} WHERE idJeu = ${db.escape(id)}`
         db.query(sql, [], (err, result) => {
             if (err){
                 console.error(err.message);

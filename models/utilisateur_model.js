@@ -13,9 +13,9 @@ function getUtilisateurs(){
         });
     });
 }
-function getUtilisateur(){
+function getUtilisateur(id){
     return new Promise((resolve, reject) => {
-        const sql = "SELECT * FROM Utilisateur"
+        const sql = `SELECT * FROM Utilisateur WHERE idUtilisateur = ${db.escape(id)}`
         db.query(sql, [], (err, result) => {
             if (err){
                 console.error(err.message);
@@ -26,23 +26,9 @@ function getUtilisateur(){
         });
     });
 }
-function deleteUtilisateur(){
+function deleteUtilisateur(id){
     return new Promise((resolve, reject) => {
-        const sql = "SELECT * FROM Utilisateur"
-        db.query(sql, [], (err, result) => {
-            if (err){
-                console.error(err.message);
-            }
-            else{
-                resolve(result);
-            }
-        });
-    });
-}
-
-function createUtilisateur(){
-    return new Promise((resolve, reject) => {
-        const sql = "SELECT * FROM Utilisateur"
+        const sql = `DELETE FROM Utilisateur WHERE idUtilisateur = ${db.escape(id)}`
         db.query(sql, [], (err, result) => {
             if (err){
                 console.error(err.message);
@@ -54,9 +40,23 @@ function createUtilisateur(){
     });
 }
 
-function updateUtilisateur(){
+function createUtilisateur(nom,prenom,mail,mdp){
     return new Promise((resolve, reject) => {
-        const sql = "SELECT * FROM Utilisateur"
+        const sql = `INSERT INTO Utilisateur VALUES (NULL, ${db.escape(nom)},${db.escape(prenom)},${db.escape(mail)},${db.escape(mdp)})`
+        db.query(sql, [], (err, result) => {
+            if (err){
+                console.error(err.message);
+            }
+            else{
+                resolve(result);
+            }
+        });
+    });
+}
+
+function updateUtilisateur(nom,prenom,mail,mdp,id){
+    return new Promise((resolve, reject) => {
+        const sql = `UPDATE Utilisateur SET nom = ${db.escape(nom)} , prenom = ${db.escape(prenom)}, mail = ${db.escape(mail)}, mdp = ${db.escape(mdp)} WHERE idUtilisateur= ${db.escape(id)}`
         db.query(sql, [], (err, result) => {
             if (err){
                 console.error(err.message);

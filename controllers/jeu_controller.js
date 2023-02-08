@@ -12,7 +12,7 @@ function selectJeux(req, res) {
 }
 function selectJeuById(req, res) {
 
-    promise = jeu_model.getJeu()
+    promise = jeu_model.getJeu(req.body.id)
     promise.then((values) => {
         res.status(200).send(values)
     }).catch((error) => {
@@ -22,7 +22,7 @@ function selectJeuById(req, res) {
 }
 function deleteJeu(req, res) {
 
-    promise = jeu_model.deletejeu()
+    promise = jeu_model.deleteJeu(req.body.id)
     promise.then((values) => {
         res.status(200).send(values)
     }).catch((error) => {
@@ -32,7 +32,7 @@ function deleteJeu(req, res) {
 }
 function createJeu(req, res) {
 
-    promise = jeu_model.createJeu()
+    promise = jeu_model.createJeu(req.body.idType, req.body.nom)
     promise.then((values) => {
         res.status(200).send(values)
     }).catch((error) => {
@@ -42,7 +42,7 @@ function createJeu(req, res) {
 }
 function updateJeuById(req, res) {
 
-    promise = jeu_model.updateJeu()
+    promise = jeu_model.updateJeu(req.body.id,req.body.idType,req.body.nom)
     promise.then((values) => {
         res.status(200).send(values)
     }).catch((error) => {

@@ -12,7 +12,7 @@ function selectZones(req, res) {
 }
 function selectZoneById(req, res) {
 
-    promise = zone_model.getZone()
+    promise = zone_model.getZone(req.body.id)
     promise.then((values) => {
         res.status(200).send(values)
     }).catch((error) => {
@@ -22,7 +22,7 @@ function selectZoneById(req, res) {
 }
 function deleteZone(req, res) {
 
-    promise = zone_model.deletezone()
+    promise = zone_model.deleteZone(req.body.id)
     promise.then((values) => {
         res.status(200).send(values)
     }).catch((error) => {
@@ -32,7 +32,7 @@ function deleteZone(req, res) {
 }
 function createZone(req, res) {
 
-    promise = zone_model.createZone()
+    promise = zone_model.createZone(req.body.nom)
     promise.then((values) => {
         res.status(200).send(values)
     }).catch((error) => {
@@ -42,7 +42,7 @@ function createZone(req, res) {
 }
 function updateZoneById(req, res) {
 
-    promise = zone_model.updateZone()
+    promise = zone_model.updateZone(req.body.nom,req.body.id)
     promise.then((values) => {
         res.status(200).send(values)
     }).catch((error) => {
