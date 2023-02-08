@@ -15,7 +15,7 @@ function getTypeJeux(){
 }
 function getTypeJeu(id){
     return new Promise((resolve, reject) => {
-        const sql = `SELECT * FROM TypeJeu WHERE idTypeJeu = ${db.escape(id)}`
+        const sql = `SELECT * FROM TypeJeu WHERE idType = ${db.escape(id)}`
         db.query(sql, [], (err, result) => {
             if (err){
                 console.error(err.message);
@@ -28,7 +28,7 @@ function getTypeJeu(id){
 }
 function deleteTypeJeu(id){
     return new Promise((resolve, reject) => {
-        const sql = `DELETE FROM TypeJeu WHERE idTypeJeu = ${db.escape(id)}`
+        const sql = `DELETE FROM TypeJeu WHERE idType = ${db.escape(id)}`
         db.query(sql, [], (err, result) => {
             if (err){
                 console.error(err.message);
@@ -56,7 +56,7 @@ function createTypeJeu(nom){
 
 function updateTypeJeu(id,nom){
     return new Promise((resolve, reject) => {
-        const sql = `UPDATE TypeJeu SET nom = ${db.escape(nom)} WHERE idTypeJeu= ${db.escape(id)}`
+        const sql = `UPDATE TypeJeu SET nom = ${db.escape(nom)} WHERE idType = ${db.escape(id)}`
         db.query(sql, [], (err, result) => {
             if (err){
                 console.error(err.message);
