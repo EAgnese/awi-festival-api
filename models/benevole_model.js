@@ -40,9 +40,9 @@ function deleteBenevole(id){
     });
 }
 
-function createBenevole(nom,prenom,email){
+function createBenevole(nom,prenom,email,mdp){
     return new Promise((resolve, reject) => {
-        const sql = `INSERT INTO Benevole VALUES (NULL, ${db.escape(nom)},${db.escape(prenom)},${db.escape(email)})`
+        const sql = `INSERT INTO Benevole VALUES (NULL, ${db.escape(nom)},${db.escape(prenom)},${db.escape(email)}, ${db.escape(mdp)})`
         db.query(sql, [], (err, result) => {
             if (err){
                 console.error(err.message);
@@ -54,9 +54,9 @@ function createBenevole(nom,prenom,email){
     });
 }
 
-function updateBenevole(nom,prenom,email,id){
+function updateBenevole(nom,prenom,email,mdp,id){
     return new Promise((resolve, reject) => {
-        const sql = `UPDATE Benevole SET nom = ${db.escape(nom)} , prenom = ${db.escape(prenom)}, email = ${db.escape(email)} WHERE idBenevole= ${db.escape(id)}`
+        const sql = `UPDATE Benevole SET nom = ${db.escape(nom)} , prenom = ${db.escape(prenom)}, email = ${db.escape(email)}, mdp = ${db.escape(mdp)} WHERE idBenevole= ${db.escape(id)}`
         db.query(sql, [], (err, result) => {
             if (err){
                 console.error(err.message);

@@ -30,7 +30,7 @@ function deleteBenevole(req, res) {
 }
 function createBenevole(req, res) {
 
-    promise = benevole_model.createBenevole(req.body.nom, req.body.prenom, req.body.email)
+    promise = benevole_model.createBenevole(req.body.nom, req.body.prenom, req.body.email, req.body.mdp)
     promise.then((values) => {
         res.status(200).send(values)
     }).catch((error) => {
@@ -40,7 +40,7 @@ function createBenevole(req, res) {
 }
 function updateBenevoleById(req, res) {
 
-    promise = benevole_model.updateBenevole(req.body.nom, req.body.prenom, req.body.email, req.body.id)
+    promise = benevole_model.updateBenevole(req.body.nom, req.body.prenom, req.body.email,req.body.mdp, req.body.id)
     promise.then((values) => {
         res.status(200).send(values)
     }).catch((error) => {

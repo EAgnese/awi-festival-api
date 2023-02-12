@@ -7,5 +7,6 @@ router.get("/info",utilisateur_controller.selectUtilisateurById)
 router.delete("/delete",utilisateur_controller.deleteUtilisateur)
 router.post("/create",utilisateur_controller.createUtilisateur)
 router.put("/update",utilisateur_controller.updateUtilisateurById)
+router.post("/connexion",utilisateur_controller.connexionUtilisateur)
 
 module.exports = router
