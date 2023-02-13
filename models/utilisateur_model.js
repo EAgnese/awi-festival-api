@@ -40,9 +40,9 @@ function deleteUtilisateur(id){
     });
 }
 
-function createUtilisateur(nom,prenom,mail,mdp){
+function createUtilisateur(nom,prenom,email,mdp){
     return new Promise((resolve, reject) => {
-        const sql = `INSERT INTO Utilisateur VALUES (NULL, ${db.escape(nom)},${db.escape(prenom)},${db.escape(mail)},${db.escape(mdp)},${db.escape(0)})`
+        const sql = `INSERT INTO Utilisateur VALUES (NULL, ${db.escape(nom)},${db.escape(prenom)},${db.escape(email)},${db.escape(mdp)},${db.escape(0)})`
         db.query(sql, [], (err, result) => {
             if (err){
                 console.error(err.message);
@@ -54,9 +54,9 @@ function createUtilisateur(nom,prenom,mail,mdp){
     });
 }
 
-function updateUtilisateur(nom,prenom,mail,mdp,isAdmin,id){
+function updateUtilisateur(nom,prenom,email,mdp,isAdmin,id){
     return new Promise((resolve, reject) => {
-        const sql = `UPDATE Utilisateur SET nom = ${db.escape(nom)} , prenom = ${db.escape(prenom)}, mail = ${db.escape(mail)}, mdp = ${db.escape(mdp)}, isAdmin = ${db.escape(isAdmin)} WHERE idUtilisateur= ${db.escape(id)}`
+        const sql = `UPDATE Utilisateur SET nom = ${db.escape(nom)} , prenom = ${db.escape(prenom)}, email = ${db.escape(email)}, mdp = ${db.escape(mdp)}, isAdmin = ${db.escape(isAdmin)} WHERE idUtilisateur= ${db.escape(id)}`
         db.query(sql, [], (err, result) => {
             if (err){
                 console.error(err.message);
