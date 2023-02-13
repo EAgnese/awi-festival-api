@@ -41,8 +41,8 @@ function createUtilisateur(req, res) {
     })
 }
 function updateUtilisateurById(req, res) {
-
-    promise = utilisateur_model.updateUtilisateur(req.body.nom,req.body.prenom,req.body.email,req.body.mdp,req.body.isAdmin,req.body.id)
+    
+    promise = utilisateur_model.updateUtilisateur(req.body.nom,req.body.prenom,req.body.email,req.body.mdp,req.body.isAdmin,req.body.idUtilisateur)
     promise.then((values) => {
         res.status(200).send(values)
     }).catch((error) => {
