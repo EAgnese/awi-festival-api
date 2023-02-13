@@ -12,7 +12,7 @@ function selectUtilisateurs(req, res) {
 }
 function selectUtilisateurById(req, res) {
 
-    promise = utilisateur_model.getUtilisateur(req.body.id)
+    promise = utilisateur_model.getUtilisateur(req.body.idUtilisateur)
     promise.then((values) => {
         res.status(200).send(values)
     }).catch((error) => {
@@ -22,7 +22,7 @@ function selectUtilisateurById(req, res) {
 }
 function deleteUtilisateur(req, res) {
 
-    promise = utilisateur_model.deleteUtilisateur(req.body.id)
+    promise = utilisateur_model.deleteUtilisateur(req.body.idUtilisateur)
     promise.then((values) => {
         res.status(200).send(values)
     }).catch((error) => {
@@ -41,7 +41,7 @@ function createUtilisateur(req, res) {
     })
 }
 function updateUtilisateurById(req, res) {
-    
+
     promise = utilisateur_model.updateUtilisateur(req.body.nom,req.body.prenom,req.body.email,req.body.mdp,req.body.isAdmin,req.body.idUtilisateur)
     promise.then((values) => {
         res.status(200).send(values)
