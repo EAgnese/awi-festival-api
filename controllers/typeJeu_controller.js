@@ -12,7 +12,8 @@ function selectTypeJeux(req, res) {
 }
 function selectTypeJeuById(req, res) {
 
-    promise = typeJeu_model.getTypeJeu(req.body.id)
+    const id = req.params.id
+    promise = typeJeu_model.getTypeJeu(id)
     promise.then((values) => {
         res.status(200).send(values)
     }).catch((error) => {

@@ -12,7 +12,8 @@ function selectUtilisateurs(req, res) {
 }
 function selectUtilisateurById(req, res) {
 
-    promise = utilisateur_model.getUtilisateur(req.body.idUtilisateur)
+    const id = req.params.id
+    promise = utilisateur_model.getUtilisateur(id)
     promise.then((values) => {
         res.status(200).send(values)
     }).catch((error) => {

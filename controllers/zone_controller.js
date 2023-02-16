@@ -12,7 +12,8 @@ function selectZones(req, res) {
 }
 function selectZoneById(req, res) {
 
-    promise = zone_model.getZone(req.body.id)
+    const id = req.params.id
+    promise = zone_model.getZone(id)
     promise.then((values) => {
         res.status(200).send(values)
     }).catch((error) => {

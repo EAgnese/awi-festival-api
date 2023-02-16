@@ -12,7 +12,8 @@ function selectJeux(req, res) {
 }
 function selectJeuById(req, res) {
 
-    promise = jeu_model.getJeu(req.body.id)
+    const id = req.params.id
+    promise = jeu_model.getJeu(id)
     promise.then((values) => {
         res.status(200).send(values)
     }).catch((error) => {
