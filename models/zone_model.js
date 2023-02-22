@@ -1,6 +1,6 @@
 const db = require("../config/bd");
 
-function getZones(){
+async function getZones(){
     return new Promise((resolve, reject) => {
         const sql = "SELECT * FROM Zone"
         db.query(sql, [], (err, result) => {
@@ -13,7 +13,7 @@ function getZones(){
         });
     });
 }
-function getZone(id){
+async function getZone(id){
     return new Promise((resolve, reject) => {
         const sql = `SELECT * FROM Zone WHERE idZone = ${db.escape(id)}`
         db.query(sql, [], (err, result) => {
@@ -26,7 +26,7 @@ function getZone(id){
         });
     });
 }
-function deleteZone(id){
+async function deleteZone(id){
     return new Promise((resolve, reject) => {
         const sql = `DELETE FROM Zone WHERE idZone = ${db.escape(id)}`
         db.query(sql, [], (err, result) => {
@@ -40,7 +40,7 @@ function deleteZone(id){
     });
 }
 
-function createZone(nom){
+async function createZone(nom){
     return new Promise((resolve, reject) => {
         const sql = `INSERT INTO Zone VALUES (NULL, ${db.escape(nom)})`
         db.query(sql, [], (err, result) => {
@@ -54,7 +54,7 @@ function createZone(nom){
     });
 }
 
-function updateZone(nom,id){
+async function updateZone(nom,id){
     return new Promise((resolve, reject) => {
         const sql = `UPDATE Zone SET nom = ${db.escape(nom)} WHERE idZone = ${db.escape(id)}`
         db.query(sql, [], (err, result) => {

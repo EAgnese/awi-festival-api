@@ -1,6 +1,6 @@
 const db = require("../config/bd");
 
-function getJeux(){
+async function getJeux(){
     return new Promise((resolve, reject) => {
         const sql = "SELECT * FROM Jeu"
         db.query(sql, [], (err, result) => {
@@ -13,7 +13,7 @@ function getJeux(){
         });
     });
 }
-function getJeu(id){
+async function getJeu(id){
     return new Promise((resolve, reject) => {
         const sql = `SELECT * FROM Jeu WHERE idJeu = ${db.escape(id)}`
         db.query(sql, [], (err, result) => {
@@ -26,7 +26,7 @@ function getJeu(id){
         });
     });
 }
-function deleteJeu(id){
+async function deleteJeu(id){
     return new Promise((resolve, reject) => {
         const sql = `DELETE FROM Jeu WHERE idJeu = ${db.escape(id)}`
         db.query(sql, [], (err, result) => {
@@ -39,7 +39,7 @@ function deleteJeu(id){
         });
     });
 }
-function createJeu(idType, nom){
+async function createJeu(idType, nom){
     return new Promise((resolve, reject) => {
         const sql = `INSERT INTO Jeu VALUES (NULL, ${db.escape(idType)},${db.escape(nom)})`
         db.query(sql, [], (err, result) => {
@@ -52,7 +52,7 @@ function createJeu(idType, nom){
         });
     });
 }
-function updateJeu(id,idType,nom){
+async function updateJeu(id,idType,nom){
     return new Promise((resolve, reject) => {
         const sql = `UPDATE Jeu SET idType = ${db.escape(idType)} , nom = ${db.escape(nom)} WHERE idJeu = ${db.escape(id)}`
         db.query(sql, [], (err, result) => {
