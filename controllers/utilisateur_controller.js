@@ -11,7 +11,6 @@ function selectUtilisateurs(req, res) {
     })
 }
 function selectUtilisateurById(req, res) {
-
     const id = req.params.id
     promise = utilisateur_model.getUtilisateur(id)
     promise.then((values) => {

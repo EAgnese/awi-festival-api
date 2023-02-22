@@ -80,7 +80,7 @@ async function updateUtilisateur(nom,prenom,email,mdp,isAdmin,id){
 
 async function connexionUtilisateur(email,mdp){
     return new Promise((resolve, reject) => {
-        const sql = `SELECT mdp FROM Utilisateur WHERE email = ${db.escape(email)}`
+        const sql = `SELECT * FROM Utilisateur WHERE email = ${db.escape(email)}`
         db.query(sql, [], (err, result) => {
             if (err){
                 console.error(err.message);
