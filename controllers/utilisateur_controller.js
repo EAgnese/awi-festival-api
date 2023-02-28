@@ -32,7 +32,7 @@ function deleteUtilisateur(req, res) {
 }
 function createUtilisateur(req, res) {
 
-    promise = utilisateur_model.createUtilisateur(req.body.nom,req.body.prenom,req.body.email,req.body.mdp,false)
+    promise = utilisateur_model.createUtilisateur(req.body.nom,req.body.prenom,req.body.email,req.body.mdp,req.body.isAdmin)
     promise.then((values) => {
         res.status(200).send(values)
     }).catch((error) => {
@@ -41,14 +41,14 @@ function createUtilisateur(req, res) {
     })
 }
 function updateUtilisateurById(req, res) {
-
+    
     promise = utilisateur_model.updateUtilisateur(req.body.nom,req.body.prenom,req.body.email,req.body.mdp,req.body.isAdmin,req.body.idUtilisateur)
     promise.then((values) => {
         res.status(200).send(values)
     }).catch((error) => {
         res.status(400).send({msg: "Problème mise à jour d'un utilisateur"})
         console.error(error.message)
-    })
+    })   
 }
 function connexionUtilisateur(req, res) {
 
@@ -56,6 +56,7 @@ function connexionUtilisateur(req, res) {
     promise.then((values) => {
         res.status(200).send(values)
     }).catch((error) => {
+        console.log("AHHHHHHHHHHHHHHHHHHHHHHH")
         res.status(400).send({msg: "Problème connexion d'un utilisateur"})
         console.error(error.message)
     })

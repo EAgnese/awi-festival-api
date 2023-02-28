@@ -1,46 +1,94 @@
 const jwt = require('jsonwebtoken');
-require("dotenv").config()
 
 module.exports = {
-  //verification du format du mdp
-  verification: (req, res, next) => { 
+ 
+  //verification du format du mdp & pseudo
+  verifLogin: (req, res, next) => { 
     // pseudo > 3 caractères
-    if (!req.body.pseudo || req.body.pseudo.length < 3) {
+    if (!req.body.email || req.body.email.length < 3) {
       return res.status(400).send({msg: 'Entrez un pseudo avec au moins 3 caractères'})
     }
+    /*
     // mdp > 6 caractères
     if (!req.body.mdp || req.body.mdp.length < 6) {
       return res.status(400).send({msg: 'Entrez un mot de passe avec au moins 6 caractères'})
-    }
+    }*/
+    /*
     // mdp = mdp de vérification
     if (!req.body.mdpC || req.body.mdp != req.body.mdpC) {
       return res.status(400).send({msg: 'Les mots de passe ne correspondent pas'})
-    }
+    }*/
     next()
   },
   //verification utilisateur connecté
-  connecte: (req, res, next) => {
+  verifConnecte: (req, res, next) => {
     try {
-      const token = req.headers.authorization.split(' ')[1]
-      const decoded = jwt.verify(token,'KJI54!zyuhsu6353hdsdskhsz1!!fdj7EH1')
-      req.userData = decoded
+      const token = req.headers.autorization.split(' ')[1]
+      console.log("token : " + token)
+      if (!token && token[0] == 'Bearer') {
+        console.log("INVALD TOKEN")
+        return res.status(400).send({msg: 'Token invalide !'})
+      }
+      const decoded = jwt.verify(token,process.env.SECRET_KEY)
+      req.token = decoded
       next()
     } catch (err) {
+      console.log("INVALID SESSION")
       return res.status(400).send({msg: 'Session invalide !'})
     }
-  },// verif utilisateur admin 
-  verifAdmin: (req, res, next) => {
+  },
+  //verification idUtilisateur connecté = idUtilisateur de la requête
+  verifMemeId: (req, res, next) => {
     try {
-      const token = req.headers.authorization.split(' ')[1]
-      const decoded = jwt.verify(token,'KJI54!zyuhsu6353hdsdskhsz1!!fdj7EH1')
-      req.userData = decoded
-      if (req.userData.isAdmin === 1){
+      console.log("headers : "+req.headers.autorization)
+      const token = req.headers.autorization.split(' ')[1]
+
+      if (!token && token[0] == 'Bearer') {
+        console.log("INVALD TOKEN meme id")
+        return res.status(400).send({msg: 'Token invalide !'})
+      }
+      const decoded = jwt.verify(token,process.env.SECRET_KEY)
+      req.token = decoded
+
+      //configuration idSelectionne en fonction d'un GET ou POST
+      let idSelectionne = 0
+      if(req.params.id == null){
+        idSelectionne = req.body.idUtilisateur
+      }
+      else{
+        idSelectionne = req.params.id
+      }
+
+      if(req.token.isAdmin == 1 || req.token.idUtilisateur == idSelectionne){
         next()
       }else{
-        return res.status(400).send({msg: 'Utilisateur non admin'})
+        console.log("Vous n'avez pas les droits pour modifier cet utilisateur !")
+        return res.status(400).send({msg: 'Vous n\'avez pas les droits pour modifier cet utilisateur !'})
       }
     } catch (err) {
-      return res.status(400).send({msg: 'Problème admin'})
+      console.log("INVALID SESSION meme id")
+      return res.status(400).send({msg: 'Session invalide !'})
+    }
+  },
+  // verification utilisateur admin 
+  verifAdmin: (req, res, next) => {
+    try {
+      const token = req.headers.autorization.split(' ')[1]
+      if (!token && token[0] == 'Bearer') {
+        console.log("INVALID ADMIN TOKEN")
+        return res.status(400).send({msg: 'Token invalide !'})
+      }
+      const decoded = jwt.verify(token,process.env.SECRET_KEY)
+      req.token = decoded
+      if(req.token.isAdmin == 1){
+        next()
+      }else{
+        console.log("Vous n'avez pas les droits administrateurs !")
+        return res.status(400).send({msg: 'Vous n\'avez pas les droits administrateurs !'})
+      }
+    } catch (err) {
+      console.log("INVALID ADMIN SESSION")
+      return res.status(400).send({msg: 'Session invalide !'})
     }
   }
 }
