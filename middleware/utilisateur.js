@@ -24,27 +24,22 @@ module.exports = {
   verifConnecte: (req, res, next) => {
     try {
       const token = req.headers.autorization.split(' ')[1]
-      console.log("token : " + token)
       if (!token && token[0] == 'Bearer') {
-        console.log("INVALD TOKEN")
         return res.status(400).send({msg: 'Token invalide !'})
       }
       const decoded = jwt.verify(token,process.env.SECRET_KEY)
       req.token = decoded
       next()
     } catch (err) {
-      console.log("INVALID SESSION")
       return res.status(400).send({msg: 'Session invalide !'})
     }
   },
   //verification idUtilisateur connecté = idUtilisateur de la requête
   verifMemeId: (req, res, next) => {
     try {
-      console.log("headers : "+req.headers.autorization)
       const token = req.headers.autorization.split(' ')[1]
 
       if (!token && token[0] == 'Bearer') {
-        console.log("INVALD TOKEN meme id")
         return res.status(400).send({msg: 'Token invalide !'})
       }
       const decoded = jwt.verify(token,process.env.SECRET_KEY)
@@ -66,7 +61,6 @@ module.exports = {
         return res.status(400).send({msg: 'Vous n\'avez pas les droits pour modifier cet utilisateur !'})
       }
     } catch (err) {
-      console.log("INVALID SESSION meme id")
       return res.status(400).send({msg: 'Session invalide !'})
     }
   },
@@ -75,7 +69,6 @@ module.exports = {
     try {
       const token = req.headers.autorization.split(' ')[1]
       if (!token && token[0] == 'Bearer') {
-        console.log("INVALID ADMIN TOKEN")
         return res.status(400).send({msg: 'Token invalide !'})
       }
       const decoded = jwt.verify(token,process.env.SECRET_KEY)
@@ -87,7 +80,6 @@ module.exports = {
         return res.status(400).send({msg: 'Vous n\'avez pas les droits administrateurs !'})
       }
     } catch (err) {
-      console.log("INVALID ADMIN SESSION")
       return res.status(400).send({msg: 'Session invalide !'})
     }
   }

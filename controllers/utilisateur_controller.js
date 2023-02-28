@@ -56,7 +56,6 @@ function connexionUtilisateur(req, res) {
     promise.then((values) => {
         res.status(200).send(values)
     }).catch((error) => {
-        console.log("AHHHHHHHHHHHHHHHHHHHHHHH")
         res.status(400).send({msg: "Problème connexion d'un utilisateur"})
         console.error(error.message)
     })

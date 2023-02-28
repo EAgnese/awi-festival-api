@@ -80,13 +80,14 @@ async function updateUtilisateur(nom,prenom,email,mdp,isAdmin,id){
                 }
             });
         }else{
+          
             bcrypt.genSalt(10, function (err , salt) {
                 if(err) return console.log(err)
                 bcrypt.hash(mdp, salt, function (err, hash) {
                     if (err) {
-                    return console.log('Impossible de crypter le mot de passe');
+                        return console.log('Impossible de crypter le mot de passe');
                     }
-                    sql = `UPDATE Utilisateur SET nom = ${db.escape(nom)} , prenom = ${db.escape(prenom)}, email = ${db.escape(email)}, mdp = ${db.escape(mdp)}, isAdmin = ${db.escape(isAdmin)} WHERE idUtilisateur= ${db.escape(id)}`
+                    sql = `UPDATE Utilisateur SET nom = ${db.escape(nom)} , prenom = ${db.escape(prenom)}, email = ${db.escape(email)}, mdp = ${db.escape(hash)}, isAdmin = ${db.escape(isAdmin)} WHERE idUtilisateur= ${db.escape(id)}`
                     db.query(sql, [], (err, result) => {
                         if (err){
                             console.error(err.message);
@@ -106,7 +107,6 @@ async function connexionUtilisateur(email,mdp){
         const sql = `SELECT * FROM Utilisateur WHERE email = ${db.escape(email)}`
         db.query(sql, [], (err, result) => {
             if (err){
-                console.log("COCUCOCU")
                 console.error(err.message);
             }
             else if (!result.length) {
