@@ -53,10 +53,15 @@ function updateUtilisateurById(req, res) {
 function connexionUtilisateur(req, res) {
 
     promise = utilisateur_model.connexionUtilisateur(req.body.email,req.body.mdp)
-    promise.then((values) => {
-        res.status(200).send(values)
-    }).catch((error) => {
-        res.status(400).send({msg: "Problème connexion d'un utilisateur"})
+    promise.then(
+        (values) => {
+            res.status(200).send(values)
+        },
+        (error) => {
+            res.status(400).send({msg: error.message})
+        }
+    ).catch((error) => {
+        res.status(400).send({msg: error.message})
         console.error(error.message)
     })
 }

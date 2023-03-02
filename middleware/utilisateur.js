@@ -58,7 +58,7 @@ module.exports = {
         next()
       }else{
         console.log("Vous n'avez pas les droits pour modifier cet utilisateur !")
-        return res.status(400).send({msg: 'Vous n\'avez pas les droits pour modifier cet utilisateur !'})
+        return res.status(403).send({msg: 'Vous n\'avez pas les droits pour modifier cet utilisateur !'})
       }
     } catch (err) {
       return res.status(400).send({msg: 'Session invalide !'})
@@ -77,7 +77,7 @@ module.exports = {
         next()
       }else{
         console.log("Vous n'avez pas les droits administrateurs !")
-        return res.status(400).send({msg: 'Vous n\'avez pas les droits administrateurs !'})
+        return res.status(403).send({msg: 'Vous n\'avez pas les droits administrateurs !'})
       }
     } catch (err) {
       return res.status(400).send({msg: 'Session invalide !'})

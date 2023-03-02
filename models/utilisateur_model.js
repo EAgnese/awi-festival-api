@@ -9,6 +9,7 @@ async function getUtilisateurs(){
         db.query(sql, [], (err, result) => {
             if (err){
                 console.error(err.message);
+                reject(err)
             }
             else{
                 resolve(result);
@@ -22,6 +23,7 @@ async function getUtilisateur(id){
         db.query(sql, [], (err, result) => {
             if (err){
                 console.error(err.message);
+                reject(err)
             }
             else{
                 resolve(result);
@@ -35,6 +37,7 @@ async function deleteUtilisateur(id){
         db.query(sql, [], (err, result) => {
             if (err){
                 console.error(err.message);
+                reject(err)
             }
             else{
                 resolve(result);
@@ -46,16 +49,17 @@ async function deleteUtilisateur(id){
 async function createUtilisateur(nom,prenom,email,mdp,isAdmin){
     //cryptage mdp
     bcrypt.genSalt(10, function (err , salt) {
-        if(err) return console.log(err)
+        if(err) return(err.message)
       bcrypt.hash(mdp, salt, function (err, hash) {
         if (err) {
-          return console.log('Impossible de crypter le mot de passe');
+          return('Impossible de crypter le mot de passe');
         }
         return new Promise((resolve, reject) => {
             const sql = `INSERT INTO Utilisateur VALUES (NULL, ${db.escape(nom)},${db.escape(prenom)},${db.escape(email)},${db.escape(hash)},${db.escape(isAdmin)})`
             db.query(sql, [], (err, result) => {
                 if (err){
                     console.error(err.message);
+                    reject(message)
                 }
                 else{
                     resolve(result);
@@ -74,23 +78,25 @@ async function updateUtilisateur(nom,prenom,email,mdp,isAdmin,id){
             db.query(sql, [], (err, result) => {
                 if (err){
                     console.error(err.message);
+                    reject(err)
                 }
                 else{
                     resolve(result);
                 }
             });
         }else{
-          
             bcrypt.genSalt(10, function (err , salt) {
-                if(err) return console.log(err)
+                if(err) reject(err)
                 bcrypt.hash(mdp, salt, function (err, hash) {
                     if (err) {
-                        return console.log('Impossible de crypter le mot de passe');
+                        console.error('Impossible de crypter le mot de passe')
+                        reject(err);
                     }
                     sql = `UPDATE Utilisateur SET nom = ${db.escape(nom)} , prenom = ${db.escape(prenom)}, email = ${db.escape(email)}, mdp = ${db.escape(hash)}, isAdmin = ${db.escape(isAdmin)} WHERE idUtilisateur= ${db.escape(id)}`
                     db.query(sql, [], (err, result) => {
                         if (err){
                             console.error(err.message);
+                            reject(err)
                         }
                         else{
                             resolve(result);
@@ -108,27 +114,31 @@ async function connexionUtilisateur(email,mdp){
         db.query(sql, [], (err, result) => {
             if (err){
                 console.error(err.message);
+                reject(err)
             }
             else if (!result.length) {
-                console.error("Identifiant ou mot de passe incorrect !")
+                console.error("Utilisateur non trouvé !");
+                reject(new Error("Identifiant incorrect !"))
             }
             else{
                 // verification du mdp hashé avec compare
                 bcrypt.compare(mdp,result[0].mdp,(bErr, bResult) => {
-                    // mauvais mdp
                     if (bErr) {
-                        console.log("Email ou mot de passe incorrect !")
+                        console.error("Erreur lors du cryptage du mot de passe !");
+                        reject(bErr)
                     }
                     if (bResult) {
                         //creation token 
                         try{
                             const token = jwt.sign({ idUtilisateur: result[0]['idUtilisateur'], isAdmin: result[0]['isAdmin']}, process.env.SECRET_KEY, {expiresIn: '2 days'})
-                            console.log("Connexion réussie !")
                             resolve(token);
                         }catch(err){
-                            console.log(err)
-                            console.error("Erreur lors de la connexion avec le token !")
+                            console.error("Erreur lors de la connexion avec le token !");
+                            reject(err)
                         }   
+                    }else{
+                        console.error("Mot de passe incorrect !");
+                        reject(new Error('Mot de passe incorrect !'))
                     }
                 })
             }
