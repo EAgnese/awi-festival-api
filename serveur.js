@@ -13,9 +13,14 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json({limit: '10mb', extended: true}))
 app.use(bodyParser.urlencoded({limit: '10mb', extended: true}))
 
+
 // on va chercher fichier routes
 var routes = require("./routes/route");
 routes(app) //envoi de l'app 
+
+app.use((req,res,next) =>{
+  res.status(404).send('page not found')
+})
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {
