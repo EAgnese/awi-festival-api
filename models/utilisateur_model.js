@@ -42,31 +42,32 @@ async function deleteUtilisateur(id){
             else{
                 resolve(result);
             }
-        });
-    });
+        })
+    })
 }
 
 async function createUtilisateur(nom,prenom,email,mdp,isAdmin){
-    //cryptage mdp
-    bcrypt.genSalt(10, function (err , salt) {
-        if(err) return(err.message)
-      bcrypt.hash(mdp, salt, function (err, hash) {
-        if (err) {
-          return('Impossible de crypter le mot de passe');
-        }
-        return new Promise((resolve, reject) => {
-            const sql = `INSERT INTO Utilisateur VALUES (NULL, ${db.escape(nom)},${db.escape(prenom)},${db.escape(email)},${db.escape(hash)},${db.escape(isAdmin)})`
-            db.query(sql, [], (err, result) => {
-                if (err){
-                    console.error(err.message);
-                    reject(message)
+    return new Promise((resolve, reject) => {
+        //cryptage mdp
+        bcrypt.genSalt(10, function (err , salt) {
+            if(err) reject(err)
+            bcrypt.hash(mdp, salt, function (err, hash) {
+                if (err) {
+                    console.error('Impossible de crypter le mot de passe')
+                    reject(err)
                 }
-                else{
-                    resolve(result);
-                }
-            });
-        });
-      })
+                const sql = `INSERT INTO Utilisateur VALUES (NULL, ${db.escape(nom)},${db.escape(prenom)},${db.escape(email)},${db.escape(hash)},${db.escape(isAdmin)})`
+                db.query(sql, [], (err, result) => {
+                    if (err){
+                        console.error(err.message);
+                        reject(err)
+                    }
+                    else{
+                        resolve(result);
+                    }
+                })
+            })
+        })
     })
 }
 
