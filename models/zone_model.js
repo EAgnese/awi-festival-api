@@ -6,6 +6,7 @@ async function getZones(){
         db.query(sql, [], (err, result) => {
             if (err){
                 console.error(err.message);
+                reject(err)
             }
             else{
                 resolve(result);
@@ -19,6 +20,7 @@ async function getZone(id){
         db.query(sql, [], (err, result) => {
             if (err){
                 console.error(err.message);
+                reject(err)
             }
             else{
                 resolve(result);
@@ -32,6 +34,7 @@ async function deleteZone(id){
         db.query(sql, [], (err, result) => {
             if (err){
                 console.error(err.message);
+                reject(err)
             }
             else{
                 resolve(result);
@@ -46,6 +49,7 @@ async function createZone(nom){
         db.query(sql, [], (err, result) => {
             if (err){
                 console.error(err.message);
+                reject(err)
             }
             else{
                 resolve(result);
@@ -60,6 +64,7 @@ async function updateZone(nom,id){
         db.query(sql, [], (err, result) => {
             if (err){
                 console.error(err.message);
+                reject(err)
             }
             else{
                 resolve(result);

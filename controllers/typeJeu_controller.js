@@ -46,7 +46,7 @@ function deleteTypeJeu(req, res) {
     })
 }
 function createTypeJeu(req, res) {
-    console.log("OH OH CONTROLLER CERATE JEU")
+
     promise = typeJeu_model.createTypeJeu(req.body.nom)
     promise.then(
         (values) => {
