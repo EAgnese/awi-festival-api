@@ -8,6 +8,7 @@ async function getAttributions(){
         db.query(sql, [], (err, result) => {
             if (err){
                 console.error(err.message);
+                reject(err)
             }
             else{
                 resolve(result);
@@ -21,6 +22,7 @@ async function getAttribution(id){
         db.query(sql, [], (err, result) => {
             if (err){
                 console.error(err.message);
+                reject(err)
             }
             else{
                 resolve(result);
@@ -34,6 +36,7 @@ async function deleteAttribution(id){
         db.query(sql, [], (err, result) => {
             if (err){
                 console.error(err.message);
+                reject(err)
             }
             else{
                 resolve(result);
@@ -47,6 +50,7 @@ async function createAttribution(idType, nom){
         db.query(sql, [], (err, result) => {
             if (err){
                 console.error(err.message);
+                reject(err)
             }
             else{
                 resolve(result);
@@ -60,6 +64,7 @@ async function updateAttribution(id,idType,nom){
         db.query(sql, [], (err, result) => {
             if (err){
                 console.error(err.message);
+                reject(err)
             }
             else{
                 resolve(result);

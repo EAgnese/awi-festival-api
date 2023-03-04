@@ -123,6 +123,8 @@ async function connexionUtilisateur(email,mdp){
             }
             else{
                 // verification du mdp hashé avec compare
+                console.log("mdp donné: "+mdp)
+                console.log("mdp dans la bd: "+result[0].mdp)
                 bcrypt.compare(mdp,result[0].mdp,(bErr, bResult) => {
                     if (bErr) {
                         console.error("Erreur lors du cryptage du mot de passe !");
