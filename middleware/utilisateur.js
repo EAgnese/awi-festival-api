@@ -80,6 +80,7 @@ module.exports = {
         return res.status(403).send({msg: 'Vous n\'avez pas les droits administrateurs !'})
       }
     } catch (err) {
+      console.error(err)
       return res.status(400).send({msg: 'Session invalide !'})
     }
   }

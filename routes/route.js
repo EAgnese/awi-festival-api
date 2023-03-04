@@ -6,7 +6,7 @@ module.exports = (app) =>{
     const attributionRouter = require('./attribution_route');
 
     app.use('/jeux', jeuRouter);
-    app.use('/typesJeux', typeJeuRouter);
+    app.use('/typeJeux', typeJeuRouter);
     app.use('/zones', zoneRouter);
     app.use('/utilisateurs', utilisateurRouter);
     app.use('/attributions', attributionRouter);
