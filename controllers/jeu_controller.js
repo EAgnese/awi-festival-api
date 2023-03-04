@@ -16,6 +16,7 @@ function selectJeux(req, res) {
     })
 }
 function selectJeuById(req, res) {
+
     const id = req.params.id
     promise = jeu_model.getJeu(id)
     promise.then(
@@ -61,7 +62,7 @@ function createJeu(req, res) {
     })
 }
 function updateJeuById(req, res) {
-    
+
     promise = jeu_model.updateJeu(req.body.idType,req.body.nom,req.body.idJeu)
     promise.then(
         (values) => {
