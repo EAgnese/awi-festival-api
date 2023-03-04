@@ -3,11 +3,11 @@ module.exports = (app) =>{
     const typeJeuRouter = require('./typeJeu_route');
     const zoneRouter = require('./zone_route');
     const utilisateurRouter = require('./utilisateur_route');
-    const attributionRouter = require('./attribution_route');
+    const attributionZoneRouter = require('./attributionZone_route');
 
     app.use('/jeux', jeuRouter);
     app.use('/typesJeux', typeJeuRouter);
     app.use('/zones', zoneRouter);
     app.use('/utilisateurs', utilisateurRouter);
-    app.use('/attributions', attributionRouter);
+    app.use('/attributionsZone', attributionZoneRouter);
 }
