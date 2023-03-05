@@ -5,7 +5,24 @@ function selectAttributionsZone(req, res) {
     promise = attribution_model.getAttributionsZone()
     promise.then(
         (values) => {
-            res.status(200).send(values)
+            const result =  values.map(item => {
+                return {
+                zone : {
+                    id : item.idZone,
+                    nom : item.nomZone
+                },
+                benevole : {
+                    id : item.idUtilisateur, 
+                    nom : item.nom, 
+                    prenom : item.prenom
+                },
+                creneau : {
+                    id: item.idCreneau,
+                    dateDebut :item.dateDebut, 
+                    dateFin : item.dateFin
+                }
+            }})
+            res.status(200).send(result)
         },
         (error) => {
             res.status(400).send({msg: error.message})
@@ -67,26 +84,10 @@ function createAttributionZone(req, res) {
     })
 }
 
-// function updateAttributionZoneById(req, res) {
-
-//     promise = attribution_model.updateAttribution(req.body.id,req.body.idType,req.body.nom)
-//     promise.then(
-//         (values) => {
-//             res.status(200).send(values)
-//         },
-//         (error) => {
-//             res.status(400).send({msg: error.message})
-//         }
-//     ).catch((error) => {
-//         res.status(500).send({msg: "Problème mise à jour du attribution"})
-//         console.error(error.message)
-//     })
-// }
 
 module.exports = {
     selectAttributionsZone,
     selectAttributionZoneById,
     deleteAttributionZone,
     createAttributionZone,
-    //updateAttributionZOneById,
 }
