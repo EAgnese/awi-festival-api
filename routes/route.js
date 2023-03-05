@@ -5,6 +5,7 @@ module.exports = (app) =>{
     const utilisateurRouter = require('./utilisateur_route');
     const attributionZoneRouter = require('./attributionZone_route');
     const attributionJeuRouter = require('./attributionJeu_route');
+    const creneauRouter = require('./creneau_route');
 
     app.use('/jeux', jeuRouter);
     app.use('/typeJeux', typeJeuRouter);
@@ -12,4 +13,5 @@ module.exports = (app) =>{
     app.use('/utilisateurs', utilisateurRouter);
     app.use('/attributionsZone', attributionZoneRouter);
     app.use('/attributionsJeux', attributionJeuRouter);
+    app.use('/creneaux',creneauRouter)//ptet à enlever c'est pour des tests
 }
