@@ -14,7 +14,7 @@ async function getAttributionsJeux(){
         });
     });
 }
-async function getJeuByIdZone(id){
+async function getJeuNonSelectByIdZone(id){
     return new Promise((resolve, reject) => {
         const sql = `SELECT * FROM Jeu WHERE idJeu NOT IN (SELECT idJeu FROM AttributionJeu WHERE idZone = ${db.escape(id)}) `
         db.query(sql, [], (err, result) => {
@@ -28,9 +28,9 @@ async function getJeuByIdZone(id){
         });
     });
 }
-async function getAttributionJeuByIdZone(id){
+async function getJeuByIdZone(id){
     return new Promise((resolve, reject) => {
-        const sql = `SELECT idJeu FROM AttributionJeu WHERE idZone = ${db.escape(id)}`
+        const sql = `SELECT * FROM Jeu WHERE idJeu IN (SELECT idJeu FROM AttributionJeu WHERE idZone = ${db.escape(id)})`
         db.query(sql, [], (err, result) => {
             if (err){
                 console.error(err.message);
@@ -42,7 +42,7 @@ async function getAttributionJeuByIdZone(id){
         });
     });
 }
-async function getAttributionJeuByZoneJeu(idZone,idJeu){
+async function getAttributionByZoneJeu(idZone,idJeu){
     return new Promise((resolve, reject) => {
         const sql = `SELECT * FROM AttributionJeu WHERE idZone = ${db.escape(idZone)} AND idJeu = ${db.escape(idJeu)}`
         db.query(sql, [], (err, result) => {
@@ -56,7 +56,7 @@ async function getAttributionJeuByZoneJeu(idZone,idJeu){
         });
     });
 }
-async function getAttributionJeuByIdJeu(id){
+async function getZoneByIdJeu(id){
     return new Promise((resolve, reject) => {
         const sql = `SELECT idZone FROM AttributionJeu WHERE idJeu = ${db.escape(id)}`
         db.query(sql, [], (err, result) => {
@@ -102,10 +102,10 @@ async function createAttributionJeu(idZone,idJeu){
 
 module.exports ={
     getAttributionsJeux,
-    getAttributionJeuByIdJeu,
-    getAttributionJeuByIdZone,
+    getZoneByIdJeu,
     getJeuByIdZone,
-    getAttributionJeuByZoneJeu,
+    getJeuNonSelectByIdZone,
+    getAttributionByZoneJeu,
     deleteAttributionJeu,
     createAttributionJeu,
 }
