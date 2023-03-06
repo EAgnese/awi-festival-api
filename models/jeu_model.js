@@ -73,6 +73,21 @@ async function updateJeu(idType,nom,id){
      
     })
 }
+async function getAllInformationsJeu(id){
+    return new Promise((resolve, reject) => {
+        sql = `SELECT Jeu.idJeu, Jeu.idType, Jeu.nom AS nomJeu, AttributionJeu.idZone, TypeJeu.nom AS nomType FROM awi_festival.Jeu INNER JOIN awi_festival.AttributionJeu ON Jeu.idJeu = AttributionJeu.idJeu INNER JOIN awi_festival.TypeJeu ON TypeJeu.idType = Jeu.idType WHERE Jeu.idJeu = ${db.escape(id)}`
+        db.query(sql, [], (err, result) => {
+            if (err){
+                console.error(err.message);
+                reject(err)
+            }
+            else{
+                resolve(result);
+            }
+        })
+     
+    })
+}
 
 module.exports ={
     getJeux,
@@ -80,4 +95,5 @@ module.exports ={
     deleteJeu,
     createJeu,
     updateJeu,
+    getAllInformationsJeu
 }

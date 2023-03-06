@@ -109,6 +109,22 @@ function createAttribution(req, res) {
         console.error(error.message)
     })
 }
+function selectAllInformations(req, res) {
+
+    promise = attributionJeu_model.createAttributionJeu(req.body.idJeu)
+    promise.then(
+        (values) => {
+            res.status(201).send(values)
+        },
+        (error) => {
+            res.status(400).send({msg: error.message})
+        }
+    ).catch((error) => {
+        res.status(500).send({msg: error.message})
+        console.error(error.message)
+    })
+}
+
 module.exports = {
     selectAttributions,
     selectJeuByZone,
@@ -117,4 +133,5 @@ module.exports = {
     selectJeuNonSelectByZone,
     deleteAttribution,
     createAttribution,
+    selectAllInformations
 }
