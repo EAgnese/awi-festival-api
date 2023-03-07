@@ -21,7 +21,7 @@ async function getAttributionZone(idZone,idUtilisateur,idCreneau){
         const sql = `SELECT Z.nom as nomZone, U.nom, U.prenom, C.dateDebut, C.dateFin \
         FROM attributionZone as A, Creneau as C, Utilisateur as U, Zone as Z \
         where A.idZone = Z.idZone AND A.idUtilisateur = U.idUtilisateur AND A.idCreneau = C.idCreneau\
-        AND idZone = ${db.escape(idZone)} AND idUtilisateur = ${db.escape(idUtilisateur)} AND idCreneau = ${db.escape(idCreneau)}`
+        AND Z.idZone = ${db.escape(idZone)} AND U.idUtilisateur = ${db.escape(idUtilisateur)} AND C.idCreneau = ${db.escape(idCreneau)}`
         db.query(sql, [], (err, result) => {
             if (err){
                 console.error(err.message);
@@ -84,6 +84,25 @@ async function getAttributionZoneByBenevole(idUtilisateur){
         });
     });
 }
+async function getAttributionZoneByAll(idCreneau,idUtilisateur,idZone){
+    console.log('accès au modèle')
+    return new Promise((resolve, reject) => {
+        const sql = `SELECT Z.nom as nomZone, U.nom, U.prenom, C.dateDebut, C.dateFin \
+        FROM attributionZone as A, Creneau as C, Utilisateur as U, Zone as Z \
+        where A.idZone = Z.idZone AND A.idUtilisateur = U.idUtilisateur AND A.idCreneau = C.idCreneau\
+        AND U.idUtilisateur = ${db.escape(idUtilisateur)} AND C.idCreneau = ${db.escape(idCreneau)} AND Z.idZone = ${db.escape(idZone)}`
+        db.query(sql, [], (err, result) => {
+            if (err){
+                console.error(err.message);
+                reject(err)
+            }
+            else{
+                resolve(result);
+            }
+        });
+    });
+}
+
 async function deleteAttributionZone(idZone,idUtilisateur,idCreneau){
     return new Promise((resolve, reject) => {
         const sql = `DELETE FROM attributionZone WHERE idZone = ${db.escape(idZone)} AND idUtilisateur = ${db.escape(idUtilisateur)} AND idCreneau = ${db.escape(idCreneau)}`
@@ -119,6 +138,7 @@ module.exports ={
     getAttributionZoneByZone,
     getAttributionZoneByCreneau,
     getAttributionZoneByBenevole,
+    getAttributionZoneByAll,
     deleteAttributionZone,
     createAttributionZone,
 }

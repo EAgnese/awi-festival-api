@@ -75,6 +75,7 @@ function selectAttributionsByBenevole(req, res) {
 }
 function selectAttributionsByZone(req, res) {
 
+    console.log('selectAttributionsByZone')
     const idZone = req.params.idZone
     promise = attribution_model.getAttributionZoneByZone(idZone)
     promise.then(
@@ -94,6 +95,31 @@ function selectAttributionsByCreneau(req, res) {
 
     const idCreneau = req.params.idCreneau
     promise = attribution_model.getAttributionZone(idCreneau)
+    promise.then(
+        (values) => {
+            const result =  values.map(beauRendu)
+            res.status(200).send(result)
+        },
+        (error) => {
+            res.status(400).send({msg: error.message})
+        }
+    ).catch((error) => {
+        res.status(500).send({msg: "Problème sélection du attribution"})
+        console.error(error.message)
+    })
+}
+
+function selectAttributionsByAll(req, res) {
+
+    console.log('selectAttributionsByAll')
+    console.log(req.body)
+    const idCreneau = req.body.idCreneau
+    const idUtilisateur = req.body.idUtilisateur
+    const idZone = req.body.idZone
+
+    console.log('accès au controlleur')
+
+    promise = attribution_model.getAttributionZoneByAll(idCreneau,idUtilisateur,idZone)
     promise.then(
         (values) => {
             const result =  values.map(beauRendu)
@@ -147,6 +173,7 @@ module.exports = {
     selectAttributionsByBenevole,
     selectAttributionsByZone,
     selectAttributionsByCreneau,
+    selectAttributionsByAll,
     deleteAttributionZone,
     createAttributionZone,
 }
