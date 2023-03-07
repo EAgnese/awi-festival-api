@@ -85,7 +85,6 @@ async function getAttributionZoneByBenevole(idUtilisateur){
     });
 }
 async function getAttributionZoneByAll(idCreneau,idUtilisateur,idZone){
-    console.log('accès au modèle')
     return new Promise((resolve, reject) => {
         const sql = `SELECT Z.nom as nomZone, U.nom, U.prenom, C.dateDebut, C.dateFin \
         FROM attributionZone as A, Creneau as C, Utilisateur as U, Zone as Z \
