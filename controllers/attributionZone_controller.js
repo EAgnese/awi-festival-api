@@ -129,6 +129,25 @@ function selectAttributionsByAll(req, res) {
     })
 }
 
+function selectCreneauNonSelectByZoneAndBenevole(req, res) {
+
+    const idUtilisateur = req.params.idBene
+    const idZone = req.params.idZone
+
+    promise = attribution_model.getCreneauNonSelectByZoneAndBenevole(idUtilisateur,idZone)
+    promise.then(
+        (values) => {
+            res.status(200).send(values)
+        },
+        (error) => {
+            res.status(400).send({msg: error.message})
+        }
+    ).catch((error) => {
+        res.status(500).send({msg: "Problème sélection du attribution"})
+        console.error(error.message)
+    })
+}
+
 function deleteAttributionZone(req, res) {
 
     promise = attribution_model.deleteAttributionZone(req.body.idZone,req.body.idUtilisateur,req.body.idCreneau)
@@ -169,6 +188,7 @@ module.exports = {
     selectAttributionsByZone,
     selectAttributionsByCreneau,
     selectAttributionsByAll,
+    selectCreneauNonSelectByZoneAndBenevole,
     deleteAttributionZone,
     createAttributionZone,
 }
