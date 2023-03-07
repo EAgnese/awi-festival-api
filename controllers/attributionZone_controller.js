@@ -73,6 +73,7 @@ function selectAttributionsByBenevole(req, res) {
         console.error(error.message)
     })
 }
+
 function selectAttributionsByZone(req, res) {
 
     const idZone = req.params.idZone

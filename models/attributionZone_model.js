@@ -35,10 +35,10 @@ async function getAttributionZone(idZone,idUtilisateur,idCreneau){
 }
 async function getAttributionZoneByZone(idZone){
     return new Promise((resolve, reject) => {
-        const sql = `SELECT Z.nom as nomZone, U.nom, U.prenom, C.dateDebut, C.dateFin \
+        const sql = `SELECT Z.idZone, Z.nom as nomZone, U.idUtilisateur, U.nom, U.prenom, C.idCreneau, C.dateDebut, C.dateFin \
         FROM attributionZone as A, Creneau as C, Utilisateur as U, Zone as Z \
         where A.idZone = Z.idZone AND A.idUtilisateur = U.idUtilisateur AND A.idCreneau = C.idCreneau\
-        AND idZone = ${db.escape(idZone)}`
+        AND Z.idZone = ${db.escape(idZone)}`
         db.query(sql, [], (err, result) => {
             if (err){
                 console.error(err.message);
@@ -55,7 +55,7 @@ async function getAttributionZoneByCreneau(idCreneau){
         const sql = `SELECT Z.nom as nomZone, U.nom, U.prenom, C.dateDebut, C.dateFin \
         FROM attributionZone as A, Creneau as C, Utilisateur as U, Zone as Z \
         where A.idZone = Z.idZone AND A.idUtilisateur = U.idUtilisateur AND A.idCreneau = C.idCreneau\
-        AND idCreneau = ${db.escape(idCreneau)}`
+        AND C.idCreneau = ${db.escape(idCreneau)}`
         db.query(sql, [], (err, result) => {
             if (err){
                 console.error(err.message);
@@ -72,7 +72,7 @@ async function getAttributionZoneByBenevole(idUtilisateur){
         const sql = `SELECT Z.nom as nomZone, U.nom, U.prenom, C.dateDebut, C.dateFin \
         FROM attributionZone as A, Creneau as C, Utilisateur as U, Zone as Z \
         where A.idZone = Z.idZone AND A.idUtilisateur = U.idUtilisateur AND A.idCreneau = C.idCreneau\
-        AND idUtilisateur = ${db.escape(idUtilisateur)}`
+        AND U.idUtilisateur = ${db.escape(idUtilisateur)}`
         db.query(sql, [], (err, result) => {
             if (err){
                 console.error(err.message);
