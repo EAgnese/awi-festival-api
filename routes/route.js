@@ -8,7 +8,7 @@ module.exports = (app) =>{
 
     app.use('/jeux', jeuRouter);
     app.use('/typeJeux', typeJeuRouter);
-    app.use('/zones', zoneRougter);
+    app.use('/zones', zoneRouter);
     app.use('/utilisateurs', utilisateurRouter);
     app.use('/attributionsZone', attributionZoneRouter);
     app.use('/attributionsJeux', attributionJeuRouter);
