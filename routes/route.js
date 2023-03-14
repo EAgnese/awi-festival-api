@@ -6,10 +6,14 @@ module.exports = (app) =>{
     const attributionZoneRouter = require('./attributionZone_route');
     const attributionJeuRouter = require('./attributionJeu_route');
 
+
+    const router = express.Router();
+    router.get('/', (req, res) => { res.send('Hello World!') })
+
+    app.use('/test', router);
     app.use('/jeux', jeuRouter);
     app.use('/typeJeux', typeJeuRouter);
     app.use('/zones', zoneRouter);
     app.use('/utilisateurs', utilisateurRouter);
     app.use('/attributionsZone', attributionZoneRouter);
     app.use('/attributionsJeux', attributionJeuRouter);
-}
