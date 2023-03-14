@@ -5,7 +5,8 @@ let connection = mysql.createConnection({
   user     : 'mysql',
   password : 'd9600d42cb844e52',
   database : 'awi_festival',
-  port     : '3306'
+  //port     : '3306',
+  connectTimeout: 1000000,
 });
 /*
 let connection = mysql.createConnection({
