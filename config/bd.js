@@ -1,7 +1,7 @@
 let mysql = require('mysql');
 
 let connection = mysql.createConnection({
-  host     : 'dokku-mysql-awi-festival',
+  host     : 'http://awi-festival-api.cluster-ig4.igpolytech.fr/',
   user     : 'mysql',
   password : 'd9600d42cb844e52',
   database : 'awi_festival',
