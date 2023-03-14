@@ -1,9 +1,9 @@
 let mysql = require('mysql')
 
 let connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'simplify_awi',
-  password : 'Awi_festival02',
+  host     : 'dokku-mysql-awi-festival',
+  user     : 'mysql',
+  password : 'b49b0dd8a1ae40ed',
   database : 'awi_festival',
   port     : '3306',
 })
