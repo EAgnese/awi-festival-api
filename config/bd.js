@@ -7,5 +7,12 @@ let connection = mysql.createConnection({
   database : 'awi_festival',
   port     : '3306',
 })
+connection.connect(function(err) {
+  if (err) {
+      console.log('Conexão com banco ocorreu erro. ' + err + ' ' + err.code);
+      return;
+  }
+  console.log('Conexão com banco ok!');
+});
 
 module.exports = connection
