@@ -20,8 +20,8 @@ routes(app) //envoi de l'app
 
 app.use((req,res,next) =>{
   console.log(req)
-  console.log(req)
-  //res.status(404).send(req)
+  console.log(res)
+  res.status(404).send(req)
 })
 
 const PORT = process.env.PORT || 3000
