@@ -5,8 +5,8 @@ async function getJeux(){
         const sql = "SELECT * FROM Jeu"
         db.query(sql, [], (err, result) => {
             if (err){
-                console.log("EROROOROO")
-                console.error(err.message);
+                //console.log("EROROOROO")
+               // console.error(err.message);
                 reject(err)
             }
             else{
