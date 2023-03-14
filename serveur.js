@@ -18,11 +18,10 @@ app.use(bodyParser.urlencoded({limit: '10mb', extended: true}))
 var routes = require("./routes/route");
 routes(app) //envoi de l'app 
 
+/*
 app.use((req,res,next) =>{
-  console.log(req)
-  console.log(res)
-  res.status(404).send(req)
-})
+  res.status(404).send(res)
+})*/
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {
