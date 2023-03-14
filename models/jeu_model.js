@@ -83,6 +83,8 @@ async function getAllInformationsJeu(id){
             }
             else{
                 resolve(result);
+                console.log("RESULT")
+                console.log(result)
             }
         })
      
