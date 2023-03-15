@@ -2,7 +2,6 @@ let mysql = require('mysql2');
 require("dotenv").config()
 const url = require('url');
 
-console.log(process.env.DATABASE_URL)
 const dbUrl = process.env.DATABASE_URL; // assuming this is where you have stored the DSN
 const params = url.parse(dbUrl);
 console.log(params)
